@@ -33,8 +33,8 @@ find_package(gflags CONFIG REQUIRED)
 hunter_add_package(rocksdb)
 find_package(RocksDB CONFIG REQUIRED)
 
-hunter_add_package(Boost COMPONENTS program_options log)
-find_package(Boost CONFIG REQUIRED program_options log)
+hunter_add_package(Boost COMPONENTS program_options log thread system filesystem)
+find_package(Boost CONFIG REQUIRED program_options log log_setup thread system filesystem)
 
 find_package(Threads)
 
@@ -55,11 +55,16 @@ add_executable(create
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2>"
   "$<INSTALL_INTERFACE:include>"
 )
 
 target_link_libraries(${PROJECT_NAME} Boost::program_options)
+target_link_libraries(${PROJECT_NAME} ${Boost_LOG_SETUP_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${Boost_LOG_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_THREAD_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_FILESYSTEM_LIBRARY})
 target_link_libraries(${PROJECT_NAME} pthread)
 target_link_libraries(${PROJECT_NAME} RocksDB::rocksdb)
 target_link_libraries(demo ${PROJECT_NAME})
