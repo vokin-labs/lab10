@@ -1,7 +1,7 @@
 // Copyright 2020 MIX-1 danilonil1@yandex.ru
 
-#ifndef INCLUDE_CREATOR_HPP
-#define INCLUDE_CREATOR_HPP
+#ifndef INCLUDE_CREATOR_HPP_
+#define INCLUDE_CREATOR_HPP_
 #include <string>
 #include <iomanip>
 #include <iostream>
@@ -31,4 +31,4 @@ class Creator {
   std::vector<ColumnFamilyHandle*> handles;
   std::vector<std::string> values;
 };
-#endif  // INCLUDE_CREATOR_HPP
+#endif  // INCLUDE_CREATOR_HPP_

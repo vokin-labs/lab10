@@ -43,8 +43,9 @@ inline std::vector<int> count_num_in_each_column(Creator* creator){
                          (creator->get_column_families_names_size()) - 1) ?
                    random_int(1, sum) : sum;
         out.push_back(rand);
-      } else
+      } else {
         out.push_back(0);
+      }
       ++out[i];
     }
   } else {
@@ -55,7 +56,7 @@ inline std::vector<int> count_num_in_each_column(Creator* creator){
 
 void str_of_separator(std::stringstream& ss, const size_t& num_c){
   for (size_t i = 0; i < num_c; ++i){
-    if( i != num_c-1){
+    if (i != num_c - 1) {
       ss << std :: right << std::setfill('-')  << "|" << std::setw(18);
     } else {
       ss << std :: right << std::setfill('-')  << "|" << std::setw(20);
