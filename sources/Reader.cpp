@@ -1,6 +1,4 @@
-//
-// Created by aleksandr on 28.04.2021.
-//
+// Copyright 2020 MIX-1 danilonil1@yandex.ru
 
 #include "Reader.h"
 Reader::Reader(const int& num_workers) : readers(num_workers) {}
@@ -9,7 +7,7 @@ void Reader::read(const Field& field_) {
     ++temp_nums_in_column;
     db_out->Put(rocksdb::WriteOptions(), handles_cf_out.front(),
                 field.key, field.value);
-    if(nums_in_columns.front() == temp_nums_in_column){
+    if (nums_in_columns.front() == temp_nums_in_column){
       handles_cf_out.erase(handles_cf_out.begin());
       nums_in_columns.erase(nums_in_columns.begin());
       temp_nums_in_column = 0;

@@ -1,7 +1,7 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2020 MIX-1 danilonil1@yandex.ru
 
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+#ifndef INCLUDE_KV_STORAGE_HPP_
+#define INCLUDE_KV_STORAGE_HPP_
 #include <string>
 #include <iostream>
 #include <vector>
@@ -26,13 +26,13 @@ using string = std::string;
 using std::cout;
 using std::endl;
 
-const string note = "NOTE:\n  If the database is created ignore this message, "
+const char note[] = "NOTE:\n  If the database is created ignore this message, "
               "but if the database is not created, use:\n"
               "  ./create <path_to_directory>\n\n";
-const string usage = "Usage:\n  ./demo [options] <source_path>\n\n";
-const string error_mes = "**********BAD SYNTAX**********\n"
+const char usage[] = "Usage:\n  ./demo [options] <source_path>\n\n";
+const char error_mes[] = "**********BAD SYNTAX**********\n"
                      "Look to --help or -h";
-const string default_output_path = "output_db";
+const char default_output_path[] = "output_db";
 const int default_num_threads =
     static_cast<int>(std::thread::hardware_concurrency());
 const boost::log::trivial::severity_level default_sev_lvl =
@@ -94,8 +94,9 @@ class Storage{
   Writer& use_writer();
 
   Reader& use_reader();
+
  private:
   Writer writer;
   Reader reader;
 };
-#endif // INCLUDE_HEADER_HPP_
+#endif // INCLUDE_KV_STORAGE_HPP_

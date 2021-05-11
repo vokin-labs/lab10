@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2020 MIX-1 danilonil1@yandex.ru
 
 #include <kv_storage.hpp>
 
@@ -8,7 +8,7 @@ Storage::Storage(int& num_workers)
 
 void Storage::check_status(const rocksdb::Status& status,
                            const string& message) {
-  if(!status.ok())
+  if (!status.ok())
     throw std::runtime_error(message + status.ToString());
 }
 void Storage::delete_db(rocksdb::DB* db,
@@ -43,7 +43,7 @@ void Storage::create_iterators(
     const std::vector<rocksdb::ColumnFamilyHandle*>& handles_cf,
     std::vector<rocksdb::Iterator*>& iterators_cf) {
   iterators_cf.reserve(handles_cf.size());
-  for(auto & handle : handles_cf){
+  for (auto & handle : handles_cf){
     iterators_cf.emplace_back(db->NewIterator(rocksdb::ReadOptions(),
                                               handle));
   }
@@ -61,8 +61,8 @@ void Storage::check_iterators(
     const std::vector<rocksdb::ColumnFamilyHandle*>& handles_cf,
     std::queue<Field>& fields, std::vector<int>& nums_in_columns) {
   int counter = 0;
-  for(size_t i = 1; i < iterators_cf.size(); ++i){
-    for(iterators_cf[i]->SeekToFirst();
+  for (size_t i = 1; i < iterators_cf.size(); ++i){
+    for (iterators_cf[i]->SeekToFirst();
         iterators_cf[i]->Valid();
         iterators_cf[i]->Next(), ++counter){
       BOOST_LOG_TRIVIAL(trace) << "Read:" << iterators_cf[i]->key().ToString()
@@ -85,7 +85,7 @@ void Storage::create_program_options(po::options_description& desc,
 
       ("thread_count,t", po::value<int>(), "Count worker-thread\n")
 
-      ("output,o", po::value<string>(),"Path to output file");
+      ("output,o", po::value<string>(), "Path to output file");
   store(parse_command_line(argc, argv, desc), vm);
   notify(vm);
 }
@@ -106,7 +106,8 @@ void Storage::hashing(Storage* storage, std::queue<Field>& fields,
   }
 }
 void Storage::str_of_separator(std::stringstream& ss) {
-      ss << std :: right << std::setfill('-')  << "|" << std::setw(spases_for_table[0]);
+      ss << std :: right << std::setfill('-')  << "|"
+     << std::setw(spases_for_table[0]);
       ss << "|\n" << std::setfill(' ') << std::left;
 }
 std::stringstream Storage::print_table(
@@ -115,12 +116,12 @@ std::stringstream Storage::print_table(
     const std::vector<int>& nums_in_columns) {
   std::stringstream ss;
   int num = 0;
-  for(size_t i = 0; i < handles_cf_out.size(); ++i){
+  for (size_t i = 0; i < handles_cf_out.size(); ++i){
     str_of_separator(ss);
     ss << "|" << std::right << std::setw(spases_for_table[2]) <<
         handles_cf_out[i]->GetName() << std::setw(spases_for_table[3]) <<
         " |" << endl << std::left;
-    for(int j = 0; j < nums_in_columns[i]; ++j, ++num){
+    for (int j = 0; j < nums_in_columns[i]; ++j, ++num){
       str_of_separator(ss);
       ss << std::setw(spases_for_table[1]) << "| " + out_fields[num].key +
                                                   " : " + out_fields[num].value
@@ -214,8 +215,8 @@ void Storage::init(const boost::log::trivial::severity_level& sev_lvl) {
           boost::log::keywords::rotation_size = 30 * 1024 * 1024,
           boost::log::keywords::time_based_rotation =
               boost::log::sinks::file::rotation_at_time_point(0, 0, 0),
-          boost::log::keywords::format = "[%Severity%][%TimeStamp%]: %Message%"
-      );
+          boost::log::keywords::format = "[%Severity%][%TimeStamp%]: "
+              "%Message%");
 }
 
 boost::log::trivial::severity_level Storage::choose_sev_lvl(

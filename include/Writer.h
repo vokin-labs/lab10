@@ -1,6 +1,4 @@
-//
-// Created by aleksandr on 28.04.2021.
-//
+// Copyright 2020 MIX-1 danilonil1@yandex.ru
 
 #ifndef STORAGE_WRITER_H
 #define STORAGE_WRITER_H

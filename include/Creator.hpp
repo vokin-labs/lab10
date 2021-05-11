@@ -1,15 +1,14 @@
-//
-// Created by aleksandr on 26.04.2021.
-//
+// Copyright 2020 MIX-1 danilonil1@yandex.ru
 
-#ifndef STORAGE_CREATOR_HPP
-#define STORAGE_CREATOR_HPP
+#ifndef INCLUDE_CREATOR_HPP
+#define INCLUDE_CREATOR_HPP
 #include <string>
 #include <iomanip>
 #include <iostream>
 #include <rocksdb/db.h>
 #include "rocksdb/slice.h"
 #include "rocksdb/options.h"
+#include <vector>
 
 using rocksdb::ColumnFamilyDescriptor;
 using rocksdb::ColumnFamilyOptions;
@@ -32,4 +31,4 @@ class Creator {
   std::vector<ColumnFamilyHandle*> handles;
   std::vector<std::string> values;
 };
-#endif  // STORAGE_CREATOR_HPP
+#endif  // INCLUDE_CREATOR_HPP
