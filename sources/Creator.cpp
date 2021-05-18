@@ -2,7 +2,7 @@
 
 #include "Creator.hpp"
 
-inline int random_int(const int& from, const int& to){
+ int random_int(const int& from, const int& to){
   return from + std::rand() % to;
 }
 
